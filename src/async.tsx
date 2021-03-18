@@ -7,15 +7,6 @@ import type { ComponentType } from "react";
 
 import type { Option } from "react-bootstrap-typeahead";
 
-const defaultProps = {
-  delay: 200,
-  minLength: 2,
-  options: [],
-  promptText: "Type to search...",
-  searchText: "Searching...",
-  useCache: true,
-};
-
 type Props = {
   allowNew: any;
   minLength: number;
@@ -33,10 +24,6 @@ type Props = {
 
 type Cache = {
   [key: string]: Option[];
-};
-
-type DebouncedFunction = Function & {
-  cancel: () => void;
 };
 
 /**
@@ -93,16 +80,12 @@ export function useAsync(props: Props) {
 
   // Set the debounced search function.
   useEffect(() => {
-    console.log(throttleTime, delay);
     (handleSearchDebouncedRef as any).current = throttle(
       debounce(handleSearch, 0),
       throttleTime
     );
-    return () => {
-      handleSearchDebouncedRef.current &&
-        (handleSearchDebouncedRef as any).current.cancel();
-    };
-  }, [delay, throttleTime, handleSearch]);
+    return () => {};
+  }, [handleSearch, throttleTime]);
 
   useEffect(() => {
     // Ensure that we've gone from a loading to a completed state. Otherwise

@@ -29,7 +29,7 @@ function App() {
         console.log("Query end");
       }, requestLatency);
     };
-  }, [latency, deviation, throttle]);
+  }, [latency]);
 
   const handleSliderUpdate = (e: React.ChangeEvent<HTMLInputElement>) => {
     setLatency(Number(e.target.value));
