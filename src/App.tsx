@@ -9,6 +9,7 @@ const AsyncTypeahead = withAsync(Typeahead) as any;
 
 function App() {
   const [isLoading, setIsLoading] = React.useState(false);
+  const [useCache, setUseCache] = React.useState(false);
   const [latency, setLatency] = React.useState(50);
   const [deviation, setLatencyDeviation] = React.useState(0.2);
   const [throttle, setThrottle] = React.useState(20);
@@ -83,6 +84,18 @@ function App() {
             min={0}
             max={300}
           />
+          <div className="form-group form-check">
+            <input
+              onChange={() => setUseCache(!useCache)}
+              type="checkbox"
+              checked={useCache}
+              className="form-check-input"
+              id="cache"
+            />
+            <label className="form-check-label" htmlFor="cache">
+              Use Cache
+            </label>
+          </div>
         </div>
         <AsyncTypeahead
           throttleTime={throttle}
@@ -90,6 +103,7 @@ function App() {
           delay={0}
           id="async-typeahead"
           isLoading={isLoading}
+          useCache={useCache}
           minLength={1}
           onSearch={handleSearch}
           options={options}
