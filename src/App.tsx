@@ -56,7 +56,7 @@ function App() {
             type="range"
             step={10}
             min={0}
-            max={1000}
+            max={2000}
           />
           <label className="form-label" htmlFor="deviation">
             Random latency deviation: {deviation * 100}%
@@ -82,7 +82,7 @@ function App() {
             type="range"
             step={10}
             min={0}
-            max={300}
+            max={1000}
           />
           <div className="form-group form-check">
             <input
